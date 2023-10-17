@@ -131,8 +131,8 @@ Flowise 在一个单一的代码库中有 3 个不同的模块。
 要启用应用程序级身份验证，在 `packages/server` 的 `.env` 文件中添加 `FLOWISE_USERNAME` 和 `FLOWISE_PASSWORD`：
 
 ```
-FLOWISE_USERNAME=user
-FLOWISE_PASSWORD=1234
+FLOWISE_USERNAME=userx
+FLOWISE_PASSWORD=12345
 ```
 
 ## 🌱 环境变量

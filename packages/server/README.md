@@ -27,8 +27,8 @@ Drag & drop UI to build your customized LLM flow
 To enable app level authentication, add `FLOWISE_USERNAME` and `FLOWISE_PASSWORD` to the `.env` file:
 
 ```
-FLOWISE_USERNAME=user
-FLOWISE_PASSWORD=1234
+FLOWISE_USERNAME=user5
+FLOWISE_PASSWORD=1234x
 ```
 
 ## 🌱 Env Variables
