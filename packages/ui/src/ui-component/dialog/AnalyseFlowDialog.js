@@ -30,7 +30,8 @@ import { SwitchInput } from 'ui-component/switch/Switch'
 import { Input } from 'ui-component/input/Input'
 import { StyledButton } from 'ui-component/button/StyledButton'
 import langsmithPNG from 'assets/images/langchain.png'
-import langfusePNG from 'assets/images/langfuse.png'
+import langfuseSVG from 'assets/images/langfuse.svg'
+import lunarySVG from 'assets/images/lunary.svg'
 
 // store
 import { HIDE_CANVAS_DIALOG, SHOW_CANVAS_DIALOG } from 'store/actions'
@@ -71,7 +72,7 @@ const analyticProviders = [
     {
         label: 'LangFuse',
         name: 'langFuse',
-        icon: langfusePNG,
+        icon: langfuseSVG,
         url: 'https://langfuse.com',
         inputs: [
             {
@@ -81,32 +82,31 @@ const analyticProviders = [
                 credentialNames: ['langfuseApi']
             },
             {
-                label: 'Flush At',
-                name: 'flushAt',
-                type: 'number',
-                optional: true,
-                description: 'Number of queued requests'
-            },
-            {
-                label: 'Flush Interval',
-                name: 'flushInterval',
-                type: 'number',
-                optional: true,
-                description: 'Interval in ms to flush requests'
-            },
-            {
-                label: 'Request Timeout',
-                name: 'requestTimeout',
-                type: 'number',
-                optional: true,
-                description: 'Timeout in ms for requests'
-            },
-            {
                 label: 'Release',
                 name: 'release',
                 type: 'string',
                 optional: true,
                 description: 'The release number/hash of the application to provide analytics grouped by release'
+            },
+            {
+                label: 'On/Off',
+                name: 'status',
+                type: 'boolean',
+                optional: true
+            }
+        ]
+    },
+    {
+        label: 'Lunary',
+        name: 'lunary',
+        icon: lunarySVG,
+        url: 'https://lunary.ai',
+        inputs: [
+            {
+                label: 'Connect Credential',
+                name: 'credential',
+                type: 'credential',
+                credentialNames: ['lunaryApi']
             },
             {
                 label: 'On/Off',

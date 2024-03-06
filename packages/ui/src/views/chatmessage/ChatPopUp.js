@@ -35,6 +35,7 @@ export const ChatPopUp = ({ chatflowid }) => {
     const [open, setOpen] = useState(false)
     const [showExpandDialog, setShowExpandDialog] = useState(false)
     const [expandDialogProps, setExpandDialogProps] = useState({})
+    const [previews, setPreviews] = useState([])
 
     const anchorRef = useRef(null)
     const prevOpen = useRef(open)
@@ -85,7 +86,11 @@ export const ChatPopUp = ({ chatflowid }) => {
 
         if (isConfirmed) {
             try {
-                await chatmessageApi.deleteChatmessage(chatflowid)
+                const chatDetails = localStorage.getItem(`${chatflowid}_INTERNAL`)
+                if (!chatDetails) return
+                const objChatDetails = JSON.parse(chatDetails)
+                await chatmessageApi.deleteChatmessage(chatflowid, { chatId: objChatDetails.chatId, chatType: 'INTERNAL' })
+                localStorage.removeItem(`${chatflowid}_INTERNAL`)
                 resetChatDialog()
                 enqueueSnackbar({
                     message: 'Succesfully cleared all chat history',
@@ -187,8 +192,15 @@ export const ChatPopUp = ({ chatflowid }) => {
                     <Transitions in={open} {...TransitionProps}>
                         <Paper>
                             <ClickAwayListener onClickAway={handleClose}>
-                                <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                                    <ChatMessage chatflowid={chatflowid} open={open} />
+                                <MainCard
+                                    border={false}
+                                    className='cloud-wrapper'
+                                    elevation={16}
+                                    content={false}
+                                    boxShadow
+                                    shadow={theme.shadows[16]}
+                                >
+                                    <ChatMessage chatflowid={chatflowid} open={open} previews={previews} setPreviews={setPreviews} />
                                 </MainCard>
                             </ClickAwayListener>
                         </Paper>
@@ -200,6 +212,8 @@ export const ChatPopUp = ({ chatflowid }) => {
                 dialogProps={expandDialogProps}
                 onClear={clearChat}
                 onCancel={() => setShowExpandDialog(false)}
+                previews={previews}
+                setPreviews={setPreviews}
             ></ChatExpandDialog>
         </>
     )
